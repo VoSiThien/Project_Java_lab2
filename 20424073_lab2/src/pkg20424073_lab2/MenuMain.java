@@ -18,21 +18,17 @@ class MyClass implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String strActionCommand = e.getActionCommand();
         if (strActionCommand.equals("jbt1")) {
-            searchSlang s = new searchSlang();
-            s.setVisible(true);
+            
             
         }
         if (strActionCommand.equals("jbt2")) {
-            searchDefinition s = new searchDefinition();
-            s.setVisible(true);
+            
         }
         if (strActionCommand.equals("jbt3")) {
-            history s = new history();
-            s.setVisible(true);
+            
         }
         if (strActionCommand.equals("jbt4")) {
-            actionSlang s = new actionSlang();
-            s.setVisible(true);
+
         }
     }
 }

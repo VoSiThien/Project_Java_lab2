@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.concurrent.*;
 
-public class process {
+public class processIO {
     public void loadData(TreeMap<String, String> mapkey, TreeMap<String, String> mapvalue, ArrayList<String> His, String f) {
         String history = "history.txt";
         try {
@@ -57,9 +57,9 @@ public class process {
             }
             br.close();
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(process.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(processIO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(process.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(processIO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -73,7 +73,7 @@ public class process {
             for (Map.Entry m : mapkey.entrySet()) {
                 buffer.write(m.getKey() + "`" + m.getValue() + "\n");
             }
-            
+            buffer.close();
             writer = new FileWriter(history);
             buffer = new BufferedWriter(writer);
             for(String s: His){
@@ -82,7 +82,7 @@ public class process {
             
             buffer.close();
         } catch (IOException ex) {
-            Logger.getLogger(process.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(processIO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
