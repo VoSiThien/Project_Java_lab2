@@ -16,9 +16,12 @@ import javax.swing.*;
  */
 public class searchSlang extends javax.swing.JFrame {
 
-    /**
-     * Creates new form searchSlang
-     */
+    private JLabel jlabel1;
+    private JTextField jtextf1;
+    private JTable jtable1;
+    
+    private JButton jbt1; 
+    private JScrollPane jsp;
     public searchSlang() {
         initComponents();        
         this.myinit();
@@ -53,6 +56,31 @@ public class searchSlang extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public void myinit(){
+        this.getContentPane().setLayout(new FlowLayout());
+        jlabel1 = new JLabel("input slang word: ");
+        this.jlabel1.setBounds(40, 30, 50, 30);
+        //this.add(this.jlabel1);
+        this.getContentPane().add(this.jlabel1);  
+        
+        this.jtextf1 = new JTextField();
+        this.jtextf1.setBounds(140, 30, 200, 30);
+        //this.add(this.jtextf1);
+        this.getContentPane().add(this.jtextf1, BorderLayout.CENTER);
+        
+        this.jbt1 = new JButton("search");
+        this.jbt1.setBounds(340, 30, 50, 30);
+        //this.add(this.jbt1);
+        this.getContentPane().add(this.jbt1);  
+        
+        String data[][]={{"101","Amit","670000"}};    
+        String column[]={"ID","NAME","SALARY"};         
+        this.jtable1 = new JTable(data,column);              
+        this.jsp = new JScrollPane(this.jtable1);
+        this.jsp.setPreferredSize(new Dimension(500, 300));
+        
+        this.getContentPane().add(this.jsp);  
+        
+        
         this.setSize(600, 500);
         this.setTitle("search slang");
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
