@@ -13,28 +13,28 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 class MyClass implements ActionListener {
-    
+
     MyClass() {
     }
 
     public void actionPerformed(ActionEvent e) {
         String strActionCommand = e.getActionCommand();
         if (strActionCommand.equals("jbt1")) {
-            
-            
+
         }
         if (strActionCommand.equals("jbt2")) {
-            
+
         }
         if (strActionCommand.equals("jbt3")) {
-            
+
         }
         if (strActionCommand.equals("jbt4")) {
 
         }
     }
 }
-public class MenuMain extends javax.swing.JFrame  {
+
+public class MenuMain extends javax.swing.JFrame {
 
     /**
      * Creates new form MenuMain
@@ -50,33 +50,36 @@ public class MenuMain extends javax.swing.JFrame  {
     private JButton jbt8;
     private JButton jbt9;
     private JButton jbt10;
-    
+
     private JPanel jpanel1;
     private JPanel jpanel2;
     private JPanel jpanel3;
     private JPanel jpanel4;
     private JPanel jpanel5;
-    
+
     private JLabel jlabel1;
     private JLabel jlabel2;
     private JLabel jlabel3;
-    
+    private JLabel jlabelRandom;
+
     private JTextField jtext1;
     private JTextField jtext2;
     private JTextField jtext3;
-    
+
     private JTable jtable1;
     private JScrollPane jsc1;
-    
+
     private JDialog jdialog1;
+    private JDialog jdialog2;
+    private JDialog jdialog3;
+    private JDialog jdialog4;
     private JList jlist1;
-    
+
     public MenuMain() {
         initComponents();
         this.Myinit();
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,52 +108,51 @@ public class MenuMain extends javax.swing.JFrame  {
     /**
      * @param args the command line arguments
      */
-    
-    public void Myinit(){
-        
+    public void Myinit() {
+
         this.setSize(750, 600);
         this.setTitle("Menu");
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        
+
         //==================== panel
         this.jpanel1 = new JPanel();
         this.jpanel1.setPreferredSize(new Dimension(720, 120));
         this.jpanel1.setBackground(Color.lightGray);
         this.jpanel1.setLayout(null);
-        
+
         this.jpanel2 = new JPanel();
         this.jpanel2.setPreferredSize(new Dimension(720, 300));
         this.jpanel2.setBackground(Color.lightGray);
         this.jpanel2.setLayout(new FlowLayout());
-        
+
         this.jpanel3 = new JPanel();
         this.jpanel3.setPreferredSize(new Dimension(720, 180));
         this.jpanel3.setBackground(Color.lightGray);
         this.jpanel3.setLayout(null);
-        
+
         this.jpanel4 = new JPanel();
         this.jpanel4.setPreferredSize(new Dimension(720, 150));
         this.jpanel4.setBackground(Color.lightGray);
         this.jpanel4.setLayout(new FlowLayout());
-        
+
         this.jpanel5 = new JPanel();
         this.jpanel5.setPreferredSize(new Dimension(720, 180));
         this.jpanel5.setBackground(Color.lightGray);
         this.jpanel5.setLayout(new FlowLayout());
-        
+
         //======================= add to panel
         this.jpanel4.add(this.jpanel1);
         this.jpanel5.add(this.jpanel3);
-        
+
         this.add(this.jpanel4, BorderLayout.NORTH);
         this.add(this.jpanel2, BorderLayout.CENTER);
-        this.add(this.jpanel5, BorderLayout.SOUTH);  
+        this.add(this.jpanel5, BorderLayout.SOUTH);
         // =======================================Panel 1 head
         this.jbt1 = new JButton();
         this.jbt1.setText("Search Slang");
-        this.jbt1.setBounds(100,70,140,30);
+        this.jbt1.setBounds(100, 70, 140, 30);
         this.jbt1.setActionCommand("jbt1");
         this.jbt1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,10 +160,10 @@ public class MenuMain extends javax.swing.JFrame  {
             }
         });
         this.jpanel1.add(this.jbt1);
-        
+
         this.jbt2 = new JButton();
         this.jbt2.setText("Search definition");
-        this.jbt2.setBounds(250,70,130,30);
+        this.jbt2.setBounds(250, 70, 130, 30);
         this.jbt2.setActionCommand("jbt2");
         this.jbt2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,10 +171,10 @@ public class MenuMain extends javax.swing.JFrame  {
             }
         });
         this.jpanel1.add(this.jbt2);
-        
+
         this.jbt3 = new JButton();
         this.jbt3.setText("Hitory");
-        this.jbt3.setBounds(500,20,140, 30); 
+        this.jbt3.setBounds(500, 20, 140, 30);
         this.jbt3.setActionCommand("jbt3");
         this.jbt3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,10 +182,10 @@ public class MenuMain extends javax.swing.JFrame  {
             }
         });
         this.jpanel1.add(this.jbt3);
-        
+
         this.jbt4 = new JButton();
         this.jbt4.setText("Reset");
-        this.jbt4.setBounds(500, 70,140,30); 
+        this.jbt4.setBounds(500, 70, 140, 30);
         this.jbt4.setActionCommand("jbt4");
         this.jbt4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,15 +193,15 @@ public class MenuMain extends javax.swing.JFrame  {
             }
         });
         this.jpanel1.add(this.jbt4);
-        
+
         this.jlabel1 = new JLabel("Từ khóa");
-        this.jlabel1.setBounds(20,20,60,30);
+        this.jlabel1.setBounds(20, 20, 60, 30);
         this.jpanel1.add(this.jlabel1);
-        
+
         this.jtext1 = new JTextField();
         this.jtext1.setBounds(100, 20, 280, 30);
         this.jpanel1.add(this.jtext1);
-        
+
         // =============================================Panel 2 table
         this.jtable1 = new JTable();
         this.jtable1.setPreferredScrollableViewportSize(new Dimension(500, 290));
@@ -213,108 +215,135 @@ public class MenuMain extends javax.swing.JFrame  {
         // ========================Panel 3 Add, edit, delete, question
         this.jbt5 = new JButton();
         this.jbt5.setText("Add");
-        this.jbt5.setBounds(20,100,140,30); 
+        this.jbt5.setBounds(20, 100, 140, 30);
         this.jbt5.setActionCommand("jbt5");
         this.jpanel3.add(this.jbt5);
-        
+
         this.jbt6 = new JButton();
         this.jbt6.setText("Edit");
-        this.jbt6.setBounds(165,100,140,30); 
+        this.jbt6.setBounds(165, 100, 140, 30);
         this.jbt6.setActionCommand("jbt6");
         this.jpanel3.add(this.jbt6);
-        
+
         this.jbt7 = new JButton();
         this.jbt7.setText("Delete");
-        this.jbt7.setBounds(310,100,140,30); 
+        this.jbt7.setBounds(310, 100, 140, 30);
         this.jbt7.setActionCommand("jbt7");
         this.jpanel3.add(this.jbt7);
-        
+
         this.jtext2 = new JTextField();
         this.jtext2.setBounds(100, 10, 280, 30);
         this.jpanel3.add(this.jtext2);
-        
+
         this.jtext2 = new JTextField();
         this.jtext2.setBounds(100, 50, 280, 30);
         this.jpanel3.add(this.jtext2);
-        
+
         this.jlabel2 = new JLabel("Slang word:");
         this.jlabel2.setBounds(10, 10, 80, 30);
         this.jpanel3.add(this.jlabel2);
-        
+
         this.jlabel3 = new JLabel("Definition:");
         this.jlabel3.setBounds(10, 50, 80, 30);
         this.jpanel3.add(this.jlabel3);
-        
+
         this.jbt8 = new JButton();
         this.jbt8.setText("Random slang");
-        this.jbt8.setBounds(480,10,200,30); 
+        this.jbt8.setBounds(480, 10, 200, 30);
         this.jbt8.setActionCommand("jbt8");
+        this.jbt8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                randomSlang();
+            }
+        });
         this.jpanel3.add(this.jbt8);
-        
+
         this.jbt9 = new JButton();
         this.jbt9.setText("question slang");
-        this.jbt9.setBounds(480,55,200,30); 
-        this.jbt9.setActionCommand("jbt9");       
+        this.jbt9.setBounds(480, 55, 200, 30);
+        this.jbt9.setActionCommand("jbt9");
         this.jpanel3.add(this.jbt9);
-        
+
         this.jbt10 = new JButton();
         this.jbt10.setText("question definition");
-        this.jbt10.setBounds(480,100,200,30); 
+        this.jbt10.setBounds(480, 100, 200, 30);
         this.jbt10.setActionCommand("jbt10");
         this.jpanel3.add(this.jbt10);
     }
-    
-    public void addTable(JTable tb, String[] col, Object[][] data){
-        DefaultTableModel model = new DefaultTableModel(data , col);
+
+    public void addTable(JTable tb, String[] col, Object[][] data) {
+        DefaultTableModel model = new DefaultTableModel(data, col);
         this.jtable1.removeAll();
         tb.setModel(model);
-        
+
     }
-    public void searchSlang(){
+
+    public void searchSlang() {
         String[] col = {"Slang Word", "Definition"};
         String key = this.jtext1.getText().toString();
         Object[][] data = pro.SearchSlang(key);
         this.addTable(jtable1, col, data);
     }
-    public void searchDefinition(){
+
+    public void searchDefinition() {
         String[] col = {"Slang Word", "Definition"};
         String value = this.jtext1.getText().toString();
         Object[][] data = pro.SearchDefinition(value);
         this.addTable(jtable1, col, data);
     }
-    
-    public void ListHistory(){
+
+    public void ListHistory() {
+        JPanel panelHIS = new JPanel(new BorderLayout());
         jdialog1 = new JDialog(this, "History");
         jdialog1.setSize(500, 500);
         jdialog1.setLocationRelativeTo(null);
         jdialog1.setModal(true);
         jdialog1.setLayout(new FlowLayout());
-        
-        ArrayList<String> lh = pro.ListHistory();
-        DefaultListModel<String> l1 = new DefaultListModel<>();  
-        for(String l: lh){
-            l1.addElement(l);  
-        }  
-        JList<String> list = new JList<>(l1);  
-        list.setPreferredSize(new Dimension(470, 500));
 
-        JScrollPane scrollPane = new JScrollPane(list,
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        ArrayList<String> lh = pro.ListHistory();
+        DefaultListModel<String> l1 = new DefaultListModel<>();
+        for (String l : lh) {
+            l1.addElement(l);
+        }
+        JList<String> list = new JList<>(l1);
+        list.setPreferredSize(new Dimension(470, 500));
+//
+//        JScrollPane scrollPane = new JScrollPane(list,
+//                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+//                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setViewportView(list);
+        list.setLayoutOrientation(JList.VERTICAL);
         scrollPane.setPreferredSize(new Dimension(480, 450));
-        jdialog1.add(scrollPane);
+        
+        panelHIS.add(scrollPane);
+        jdialog1.add(panelHIS);
         jdialog1.setVisible(true);
     }
-    public void reset(){
+
+    public void reset() {
         int c = pro.reset();
-        if(c == 0){
+        if (c == 0) {
             JOptionPane.showMessageDialog(this, "Reset success!!!");
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Reset fail!!!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Reset fail!!!", "Warning",JOptionPane.WARNING_MESSAGE);
         }
     }
-    
+
+    public void randomSlang() {
+        jdialog2 = new JDialog(this, "Ramdom slang word");
+        jdialog2.setSize(400, 200);
+        jdialog2.setLocationRelativeTo(null);
+        jdialog2.setModal(true);
+        jdialog2.setLayout(null);
+        SlangWord slang = pro.ramdomSlang();
+        jlabelRandom = new JLabel("Slang word: " + slang.getSlang() + " Definition: " + slang.getDefinition());
+        jlabelRandom.setBounds(10, 50, 300, 20);
+        jdialog2.add(this.jlabelRandom);
+        jdialog2.setBackground(Color.white);
+        jdialog2.setVisible(true);
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -350,4 +379,3 @@ public class MenuMain extends javax.swing.JFrame  {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
-

@@ -15,9 +15,9 @@ import java.util.concurrent.*;
 public class processVMain {
 
     processIO p = new processIO();
-    public TreeMap<String, String> mapkey = new TreeMap<String, String>();
-    public TreeMap<String, String> mapvalue = new TreeMap<String, String>();
-    public ArrayList<String> listHistory = new ArrayList<String>();
+    private TreeMap<String, String> mapkey = new TreeMap<String, String>();
+    private TreeMap<String, String> mapvalue = new TreeMap<String, String>();
+    private ArrayList<String> listHistory = new ArrayList<String>();
 
     public processVMain() {
         String f = "slangnew.txt";
@@ -30,7 +30,7 @@ public class processVMain {
             result[0][0] = key.toString();
             result[0][1] = mapkey.get(key).toString();
         }
-        System.out.println(result[0][0] + " " + result[0][1]);
+        listHistory.add(key);
         return result;
     }
 
@@ -46,6 +46,7 @@ public class processVMain {
                 result[i][1] = value.toString();
             }
         }
+        listHistory.add(value);
         return result;
     }
 
@@ -118,5 +119,12 @@ public class processVMain {
         p.loadData(mapkey, mapvalue, listHistory, fs);
         listHistory = new ArrayList<String>();
         return 0;
+    }
+    public SlangWord ramdomSlang(){
+        Object[] listkey = mapkey.keySet().toArray();
+        Object key = listkey[new Random().nextInt(listkey.length)];
+        String slang = key.toString() + ',' + mapkey.get(key);
+        SlangWord s = new SlangWord(key.toString(), mapkey.get(key));
+        return s;
     }
 }
