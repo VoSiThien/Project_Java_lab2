@@ -24,8 +24,8 @@ public class processVMain {
         p.loadData(mapkey, mapvalue, listHistory, f);
     }
 
-    public Object [][] SearchSlang(String key) {
-        Object [][] result = new Object[1][2];
+    public Object[][] SearchSlang(String key) {
+        Object[][] result = new Object[1][2];
         if (mapkey.containsKey(key)) {
             result[0][0] = key.toString();
             result[0][1] = mapkey.get(key).toString();
@@ -34,14 +34,14 @@ public class processVMain {
         return result;
     }
 
-    public Object [][] SearchDefinition(String value) {
-        Object [][] result = new Object[0][0];
+    public Object[][] SearchDefinition(String value) {
+        Object[][] result = new Object[0][0];
         if (mapvalue.containsKey(value)) {
             String val = mapvalue.get(value);
             String[] list = val.split("\\s");
 
             result = new Object[list.length][2];
-            for(int i = 0; i < list.length; i++){
+            for (int i = 0; i < list.length; i++) {
                 result[i][0] = list[i].replace("|", "").toString();
                 result[i][1] = value.toString();
             }
@@ -112,6 +112,7 @@ public class processVMain {
         mapkey.remove(key);
         return 0;
     }
+
     public int reset() {
         String fs = "slang.txt";
         mapkey = new TreeMap<String, String>();
@@ -120,7 +121,8 @@ public class processVMain {
         listHistory = new ArrayList<String>();
         return 0;
     }
-    public SlangWord ramdomSlang(){
+
+    public SlangWord ramdomSlang() {
         Object[] listkey = mapkey.keySet().toArray();
         Object key = listkey[new Random().nextInt(listkey.length)];
         String slang = key.toString() + ',' + mapkey.get(key);
@@ -145,6 +147,28 @@ public class processVMain {
         Collections.shuffle(kq);
         kq.add(key.toString());
         kq.add(value.toString());
+        return kq;
+    }
+
+    public List<String> questionDefinition() {
+        Object[] listvalue;
+        listvalue = mapvalue.keySet().toArray();
+
+        Object value = listvalue[new Random().nextInt(listvalue.length)];
+        String key = mapvalue.get(value);
+
+        List<Map.Entry<String, String>> list = new ArrayList<Map.Entry<String, String>>(mapvalue.entrySet());
+        Collections.shuffle(list);
+
+        List<String> kq = new ArrayList<String>();
+        kq.add(list.get(0).getValue());
+        kq.add(list.get(1).getValue());
+        kq.add(list.get(2).getValue());
+        kq.add(key);
+
+        Collections.shuffle(kq);
+        kq.add(value.toString());
+        kq.add(key);
         return kq;
     }
 }

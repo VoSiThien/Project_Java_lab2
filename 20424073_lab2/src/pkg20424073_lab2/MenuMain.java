@@ -284,6 +284,11 @@ public class MenuMain extends javax.swing.JFrame {
         this.jbt10.setText("question definition");
         this.jbt10.setBounds(480, 100, 200, 30);
         this.jbt10.setActionCommand("jbt10");
+        this.jbt10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                questionDefinition();
+            }
+        });
         this.jpanel3.add(this.jbt10);
     }
 
@@ -390,19 +395,39 @@ public class MenuMain extends javax.swing.JFrame {
         this.jbtqs11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if(jradio1.isSelected() && check.equals(jradio1.getText())){
-                    JOptionPane.showMessageDialog(jdialog3,"right answer!!!");
+                    int optionType = JOptionPane.CLOSED_OPTION;
+                    int result = JOptionPane.showConfirmDialog(jdialog3, "right answer!!!", "Congratulations", optionType);
+                    if (result == JOptionPane.OK_OPTION) {
+                        jdialog3.setVisible(false);
+                    }
                 }
                 else if(jradio2.isSelected() && check.equals(jradio2.getText())){
-                    JOptionPane.showMessageDialog(jdialog3,"right answer!!!");
+                    int optionType = JOptionPane.CLOSED_OPTION;
+                    int result = JOptionPane.showConfirmDialog(jdialog3, "right answer!!!", "Congratulations", optionType);
+                    if (result == JOptionPane.OK_OPTION) {
+                        jdialog3.setVisible(false);
+                    }
                 }
                 else if(jradio3.isSelected() && check.equals(jradio3.getText())){
-                    JOptionPane.showMessageDialog(jdialog3,"right answer!!!");
+                    int optionType = JOptionPane.CLOSED_OPTION;
+                    int result = JOptionPane.showConfirmDialog(jdialog3, "right answer!!!", "Congratulations", optionType);
+                    if (result == JOptionPane.OK_OPTION) {
+                        jdialog3.setVisible(false);
+                    }
                 }
                 else if(jradio4.isSelected() && check.equals(jradio4.getText())){
-                    JOptionPane.showMessageDialog(jdialog3,"right answer!!!");
+                    int optionType = JOptionPane.CLOSED_OPTION;
+                    int result = JOptionPane.showConfirmDialog(jdialog3, "right answer!!!", "Congratulations", optionType);
+                    if (result == JOptionPane.OK_OPTION) {
+                        jdialog3.setVisible(false);
+                    }
                 }
                 else{
-                    JOptionPane.showMessageDialog(jdialog3, "wrong answer!!!", "Warning",JOptionPane.WARNING_MESSAGE);
+                    int optionType = JOptionPane.CLOSED_OPTION;
+                    int result = JOptionPane.showConfirmDialog(jdialog3, "wrong answer!!!", "Warning", optionType);
+                    if (result == JOptionPane.OK_OPTION) {
+                        jdialog3.setVisible(false);
+                    }
                 }
             }
         });
@@ -422,6 +447,90 @@ public class MenuMain extends javax.swing.JFrame {
         jdialog3.setVisible(true);        
     }
     
+    public void questionDefinition(){
+        java.util.List<String> l = new ArrayList<String>();
+        l = pro.questionDefinition();
+        String check = l.get(5).toString();
+        jdialog3 = new JDialog(this, "Question slang word");
+        jdialog3.setSize(600, 400);
+        jdialog3.setLocationRelativeTo(null);
+        jdialog3.setModal(true);
+        jdialog3.setLayout(null);
+        
+        this.jlabelqs1 = new JLabel("choose the correct slang of definition: " + l.get(4));
+        this.jlabelqs1.setBounds(100, 30, 600, 20);
+        
+        this.jradio1 = new JRadioButton(l.get(0));
+        this.jradio1.setBounds(100, 80, 300, 20);
+        
+        this.jradio2 = new JRadioButton(l.get(1));
+        this.jradio2.setBounds(100, 130, 300, 20);
+        
+        this.jradio3 = new JRadioButton(l.get(2));
+        this.jradio3.setBounds(100, 180, 300, 20);
+        
+        this.jradio4 = new JRadioButton(l.get(3));
+        this.jradio4.setBounds(100, 230, 300, 20);
+        
+        this.jbtqs11 = new JButton("Done");
+        this.jbtqs11.setBounds(230, 280, 150, 30);
+        this.jbtqs11.setActionCommand("jbtqs11");
+        this.jbtqs11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if (jradio1.isSelected() && check.equals(jradio1.getText())) {
+                    int optionType = JOptionPane.CLOSED_OPTION;
+                    int result = JOptionPane.showConfirmDialog(jdialog3, "right answer!!!", "Congratulations", optionType);
+                    if (result == JOptionPane.OK_OPTION) {
+                        jdialog3.setVisible(false);
+                    }
+                    
+                }
+                else if(jradio2.isSelected() && check.equals(jradio2.getText())){
+                    int optionType = JOptionPane.CLOSED_OPTION;
+                    int result = JOptionPane.showConfirmDialog(jdialog3, "right answer!!!", "Congratulations", optionType);
+                    if (result == JOptionPane.OK_OPTION) {
+                        jdialog3.setVisible(false);
+                    }
+                }
+                else if(jradio3.isSelected() && check.equals(jradio3.getText())){
+                    int optionType = JOptionPane.CLOSED_OPTION;
+                    int result = JOptionPane.showConfirmDialog(jdialog3, "right answer!!!", "Congratulations", optionType);
+                    if (result == JOptionPane.OK_OPTION) {
+                        jdialog3.setVisible(false);
+                    }
+                }
+                else if(jradio4.isSelected() && check.equals(jradio4.getText())){
+                    int optionType = JOptionPane.CLOSED_OPTION;
+                    int result = JOptionPane.showConfirmDialog(jdialog3, "right answer!!!", "Congratulations", optionType);
+                    if (result == JOptionPane.OK_OPTION) {
+                        jdialog3.setVisible(false);
+                    }
+                }
+                else{
+                    //JOptionPane.showMessageDialog(jdialog3, "wrong answer!!!", "Warning",JOptionPane.WARNING_MESSAGE);
+                    int optionType = JOptionPane.CLOSED_OPTION;
+                    int result = JOptionPane.showConfirmDialog(jdialog3, "wrong answer!!!", "Warning", optionType);
+                    if (result == JOptionPane.OK_OPTION) {
+                        jdialog3.setVisible(false);
+                    }
+                }
+            }
+        });
+        
+        ButtonGroup bg=new ButtonGroup();
+        bg.add(jradio1);
+        bg.add(jradio2);
+        bg.add(jradio3);
+        bg.add(jradio4);
+        
+        jdialog3.add(this.jlabelqs1);
+        jdialog3.add(this.jradio1);
+        jdialog3.add(this.jradio2);
+        jdialog3.add(this.jradio3);
+        jdialog3.add(this.jradio4);
+        jdialog3.add(this.jbtqs11);
+        jdialog3.setVisible(true);        
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
