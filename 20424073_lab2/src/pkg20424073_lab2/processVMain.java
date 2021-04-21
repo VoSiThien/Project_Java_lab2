@@ -127,4 +127,24 @@ public class processVMain {
         SlangWord s = new SlangWord(key.toString(), mapkey.get(key));
         return s;
     }
+
+    public List<String> questionSlang() {
+        Object[] listkey;
+        listkey = mapkey.keySet().toArray();
+
+        Object key = listkey[new Random().nextInt(listkey.length)];
+        String value = mapkey.get(key);
+
+        List<Map.Entry<String, String>> list = new ArrayList<Map.Entry<String, String>>(mapkey.entrySet());
+        Collections.shuffle(list);
+        List<String> kq = new ArrayList<String>();
+        kq.add(list.get(0).getValue());
+        kq.add(list.get(1).getValue());
+        kq.add(list.get(2).getValue());
+        kq.add(value);
+        Collections.shuffle(kq);
+        kq.add(key.toString());
+        kq.add(value.toString());
+        return kq;
+    }
 }

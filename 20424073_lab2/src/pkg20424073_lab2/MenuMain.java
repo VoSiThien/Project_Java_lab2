@@ -50,6 +50,7 @@ public class MenuMain extends javax.swing.JFrame {
     private JButton jbt8;
     private JButton jbt9;
     private JButton jbt10;
+    private JButton jbtqs11;
 
     private JPanel jpanel1;
     private JPanel jpanel2;
@@ -61,6 +62,11 @@ public class MenuMain extends javax.swing.JFrame {
     private JLabel jlabel2;
     private JLabel jlabel3;
     private JLabel jlabelRandom;
+    private JLabel jlabelqs1;
+    private JLabel jlabelqs2;
+    private JLabel jlabelqs3;
+    private JLabel jlabelqs4;
+    private JLabel jlabelqs5;
 
     private JTextField jtext1;
     private JTextField jtext2;
@@ -74,6 +80,11 @@ public class MenuMain extends javax.swing.JFrame {
     private JDialog jdialog3;
     private JDialog jdialog4;
     private JList jlist1;
+    
+    private JRadioButton jradio1;
+    private JRadioButton jradio2;
+    private JRadioButton jradio3;
+    private JRadioButton jradio4;
 
     public MenuMain() {
         initComponents();
@@ -262,6 +273,11 @@ public class MenuMain extends javax.swing.JFrame {
         this.jbt9.setText("question slang");
         this.jbt9.setBounds(480, 55, 200, 30);
         this.jbt9.setActionCommand("jbt9");
+        this.jbt9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                questionSlang();
+            }
+        });
         this.jpanel3.add(this.jbt9);
 
         this.jbt10 = new JButton();
@@ -343,7 +359,69 @@ public class MenuMain extends javax.swing.JFrame {
         jdialog2.setBackground(Color.white);
         jdialog2.setVisible(true);
     }
-
+    public void questionSlang(){
+        java.util.List<String> l = new ArrayList<String>();
+        l = pro.questionSlang();
+        String check = l.get(5).toString();
+        jdialog3 = new JDialog(this, "Question slang word");
+        jdialog3.setSize(600, 400);
+        jdialog3.setLocationRelativeTo(null);
+        jdialog3.setModal(true);
+        jdialog3.setLayout(null);
+        
+        this.jlabelqs1 = new JLabel("choose the correct definition of slang: " + l.get(4));
+        this.jlabelqs1.setBounds(100, 30, 300, 20);
+        
+        this.jradio1 = new JRadioButton(l.get(0));
+        this.jradio1.setBounds(100, 80, 300, 20);
+        
+        this.jradio2 = new JRadioButton(l.get(1));
+        this.jradio2.setBounds(100, 130, 300, 20);
+        
+        this.jradio3 = new JRadioButton(l.get(2));
+        this.jradio3.setBounds(100, 180, 300, 20);
+        
+        this.jradio4 = new JRadioButton(l.get(3));
+        this.jradio4.setBounds(100, 230, 300, 20);
+        
+        this.jbtqs11 = new JButton("Done");
+        this.jbtqs11.setBounds(230, 280, 150, 30);
+        this.jbtqs11.setActionCommand("jbtqs11");
+        this.jbtqs11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if(jradio1.isSelected() && check.equals(jradio1.getText())){
+                    JOptionPane.showMessageDialog(jdialog3,"right answer!!!");
+                }
+                else if(jradio2.isSelected() && check.equals(jradio2.getText())){
+                    JOptionPane.showMessageDialog(jdialog3,"right answer!!!");
+                }
+                else if(jradio3.isSelected() && check.equals(jradio3.getText())){
+                    JOptionPane.showMessageDialog(jdialog3,"right answer!!!");
+                }
+                else if(jradio4.isSelected() && check.equals(jradio4.getText())){
+                    JOptionPane.showMessageDialog(jdialog3,"right answer!!!");
+                }
+                else{
+                    JOptionPane.showMessageDialog(jdialog3, "wrong answer!!!", "Warning",JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+        
+        ButtonGroup bg=new ButtonGroup();
+        bg.add(jradio1);
+        bg.add(jradio2);
+        bg.add(jradio3);
+        bg.add(jradio4);
+        
+        jdialog3.add(this.jlabelqs1);
+        jdialog3.add(this.jradio1);
+        jdialog3.add(this.jradio2);
+        jdialog3.add(this.jradio3);
+        jdialog3.add(this.jradio4);
+        jdialog3.add(this.jbtqs11);
+        jdialog3.setVisible(true);        
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
