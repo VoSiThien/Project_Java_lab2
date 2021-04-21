@@ -5,10 +5,12 @@
  */
 package pkg20424073_lab2;
 
+import java.util.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 class MyClass implements ActionListener {
     
@@ -32,11 +34,12 @@ class MyClass implements ActionListener {
         }
     }
 }
-public class MenuMain extends javax.swing.JFrame {
+public class MenuMain extends javax.swing.JFrame  {
 
     /**
      * Creates new form MenuMain
      */
+    static private processVMain pro = new processVMain();
     private JButton jbt1;
     private JButton jbt2;
     private JButton jbt3;
@@ -44,12 +47,36 @@ public class MenuMain extends javax.swing.JFrame {
     private JButton jbt5;
     private JButton jbt6;
     private JButton jbt7;
-    private JButton jbt8;    
+    private JButton jbt8;
+    private JButton jbt9;
+    private JButton jbt10;
+    
+    private JPanel jpanel1;
+    private JPanel jpanel2;
+    private JPanel jpanel3;
+    private JPanel jpanel4;
+    private JPanel jpanel5;
+    
+    private JLabel jlabel1;
+    private JLabel jlabel2;
+    private JLabel jlabel3;
+    
+    private JTextField jtext1;
+    private JTextField jtext2;
+    private JTextField jtext3;
+    
+    private JTable jtable1;
+    private JScrollPane jsc1;
+    
+    private JDialog jdialog1;
+    private JList jlist1;
+    
     public MenuMain() {
         initComponents();
         this.Myinit();
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -80,71 +107,212 @@ public class MenuMain extends javax.swing.JFrame {
      */
     
     public void Myinit(){
-        MyClass mc = new MyClass();
+        
+        this.setSize(750, 600);
+        this.setTitle("Menu");
+        this.setLayout(new BorderLayout());
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+        
+        //==================== panel
+        this.jpanel1 = new JPanel();
+        this.jpanel1.setPreferredSize(new Dimension(720, 120));
+        this.jpanel1.setBackground(Color.lightGray);
+        this.jpanel1.setLayout(null);
+        
+        this.jpanel2 = new JPanel();
+        this.jpanel2.setPreferredSize(new Dimension(720, 300));
+        this.jpanel2.setBackground(Color.lightGray);
+        this.jpanel2.setLayout(new FlowLayout());
+        
+        this.jpanel3 = new JPanel();
+        this.jpanel3.setPreferredSize(new Dimension(720, 180));
+        this.jpanel3.setBackground(Color.lightGray);
+        this.jpanel3.setLayout(null);
+        
+        this.jpanel4 = new JPanel();
+        this.jpanel4.setPreferredSize(new Dimension(720, 150));
+        this.jpanel4.setBackground(Color.lightGray);
+        this.jpanel4.setLayout(new FlowLayout());
+        
+        this.jpanel5 = new JPanel();
+        this.jpanel5.setPreferredSize(new Dimension(720, 180));
+        this.jpanel5.setBackground(Color.lightGray);
+        this.jpanel5.setLayout(new FlowLayout());
+        
+        //======================= add to panel
+        this.jpanel4.add(this.jpanel1);
+        this.jpanel5.add(this.jpanel3);
+        
+        this.add(this.jpanel4, BorderLayout.NORTH);
+        this.add(this.jpanel2, BorderLayout.CENTER);
+        this.add(this.jpanel5, BorderLayout.SOUTH);  
+        // =======================================Panel 1 head
         this.jbt1 = new JButton();
         this.jbt1.setText("Search Slang");
-        this.jbt1.setBounds(50,100,150, 40);
-        this.add(this.jbt1);
+        this.jbt1.setBounds(100,70,140,30);
         this.jbt1.setActionCommand("jbt1");
-        this.jbt1.addActionListener(mc);
+        this.jbt1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchSlang();
+            }
+        });
+        this.jpanel1.add(this.jbt1);
         
         this.jbt2 = new JButton();
         this.jbt2.setText("Search definition");
-        this.jbt2.setBounds(200,100,150, 40); 
-        this.add(this.jbt2);
+        this.jbt2.setBounds(250,70,130,30);
         this.jbt2.setActionCommand("jbt2");
-        this.jbt2.addActionListener(mc);
-        
+        this.jbt2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchDefinition();
+            }
+        });
+        this.jpanel1.add(this.jbt2);
         
         this.jbt3 = new JButton();
         this.jbt3.setText("Hitory");
-        this.jbt3.setBounds(350,100,150, 40); 
-        this.add(this.jbt3);
+        this.jbt3.setBounds(500,20,140, 30); 
         this.jbt3.setActionCommand("jbt3");
-        this.jbt3.addActionListener(mc);
+        this.jbt3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListHistory();
+            }
+        });
+        this.jpanel1.add(this.jbt3);
         
         this.jbt4 = new JButton();
-        this.jbt4.setText("Add, Edit, Delete");
-        this.jbt4.setBounds(200,170,150,40); 
-        this.add(this.jbt4);
+        this.jbt4.setText("Reset");
+        this.jbt4.setBounds(500, 70,140,30); 
         this.jbt4.setActionCommand("jbt4");
-        this.jbt4.addActionListener(mc);
+        this.jbt4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reset();
+            }
+        });
+        this.jpanel1.add(this.jbt4);
         
+        this.jlabel1 = new JLabel("Từ khóa");
+        this.jlabel1.setBounds(20,20,60,30);
+        this.jpanel1.add(this.jlabel1);
+        
+        this.jtext1 = new JTextField();
+        this.jtext1.setBounds(100, 20, 280, 30);
+        this.jpanel1.add(this.jtext1);
+        
+        // =============================================Panel 2 table
+        this.jtable1 = new JTable();
+        this.jtable1.setPreferredScrollableViewportSize(new Dimension(500, 290));
+        this.jtable1.setFillsViewportHeight(true);
+        this.jsc1 = new JScrollPane(this.jtable1);
+        this.jpanel2.add(this.jsc1);
+        String[] columnNames = {"Slang Word", "Definition"};
+        Object[][] data = null;
+        this.addTable(jtable1, columnNames, data);
+
+        // ========================Panel 3 Add, edit, delete, question
         this.jbt5 = new JButton();
-        this.jbt5.setText("Reset");
-        this.jbt5.setBounds(50,170,150,40); 
-        this.add(this.jbt5);
+        this.jbt5.setText("Add");
+        this.jbt5.setBounds(20,100,140,30); 
         this.jbt5.setActionCommand("jbt5");
-        this.jbt5.addActionListener(mc);
+        this.jpanel3.add(this.jbt5);
         
         this.jbt6 = new JButton();
-        this.jbt6.setText("Ramdom");
-        this.jbt6.setBounds(350,170,150,40); 
-        this.add(this.jbt6);
+        this.jbt6.setText("Edit");
+        this.jbt6.setBounds(165,100,140,30); 
         this.jbt6.setActionCommand("jbt6");
-        this.jbt6.addActionListener(mc);
+        this.jpanel3.add(this.jbt6);
         
         this.jbt7 = new JButton();
-        this.jbt7.setText("question slang");
-        this.jbt7.setBounds(50,240,225,40); 
-        this.add(this.jbt7);
+        this.jbt7.setText("Delete");
+        this.jbt7.setBounds(310,100,140,30); 
         this.jbt7.setActionCommand("jbt7");
-        this.jbt7.addActionListener(mc);
+        this.jpanel3.add(this.jbt7);
+        
+        this.jtext2 = new JTextField();
+        this.jtext2.setBounds(100, 10, 280, 30);
+        this.jpanel3.add(this.jtext2);
+        
+        this.jtext2 = new JTextField();
+        this.jtext2.setBounds(100, 50, 280, 30);
+        this.jpanel3.add(this.jtext2);
+        
+        this.jlabel2 = new JLabel("Slang word:");
+        this.jlabel2.setBounds(10, 10, 80, 30);
+        this.jpanel3.add(this.jlabel2);
+        
+        this.jlabel3 = new JLabel("Definition:");
+        this.jlabel3.setBounds(10, 50, 80, 30);
+        this.jpanel3.add(this.jlabel3);
         
         this.jbt8 = new JButton();
-        this.jbt8.setText("question definition");
-        this.jbt8.setBounds(275,240,225,40); 
-        this.add(this.jbt8);
+        this.jbt8.setText("Random slang");
+        this.jbt8.setBounds(480,10,200,30); 
         this.jbt8.setActionCommand("jbt8");
-        this.jbt8.addActionListener(mc);
+        this.jpanel3.add(this.jbt8);
         
+        this.jbt9 = new JButton();
+        this.jbt9.setText("question slang");
+        this.jbt9.setBounds(480,55,200,30); 
+        this.jbt9.setActionCommand("jbt9");       
+        this.jpanel3.add(this.jbt9);
         
-        this.setSize(600, 500);
-        this.setTitle("Menu");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
+        this.jbt10 = new JButton();
+        this.jbt10.setText("question definition");
+        this.jbt10.setBounds(480,100,200,30); 
+        this.jbt10.setActionCommand("jbt10");
+        this.jpanel3.add(this.jbt10);
+    }
+    
+    public void addTable(JTable tb, String[] col, Object[][] data){
+        DefaultTableModel model = new DefaultTableModel(data , col);
+        this.jtable1.removeAll();
+        tb.setModel(model);
+        
+    }
+    public void searchSlang(){
+        String[] col = {"Slang Word", "Definition"};
+        String key = this.jtext1.getText().toString();
+        Object[][] data = pro.SearchSlang(key);
+        this.addTable(jtable1, col, data);
+    }
+    public void searchDefinition(){
+        String[] col = {"Slang Word", "Definition"};
+        String value = this.jtext1.getText().toString();
+        Object[][] data = pro.SearchDefinition(value);
+        this.addTable(jtable1, col, data);
+    }
+    
+    public void ListHistory(){
+        jdialog1 = new JDialog(this, "History");
+        jdialog1.setSize(500, 500);
+        jdialog1.setLocationRelativeTo(null);
+        jdialog1.setModal(true);
+        jdialog1.setLayout(new FlowLayout());
+        
+        ArrayList<String> lh = pro.ListHistory();
+        DefaultListModel<String> l1 = new DefaultListModel<>();  
+        for(String l: lh){
+            l1.addElement(l);  
+        }  
+        JList<String> list = new JList<>(l1);  
+        list.setPreferredSize(new Dimension(470, 500));
 
-              
+        JScrollPane scrollPane = new JScrollPane(list,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setPreferredSize(new Dimension(480, 450));
+        jdialog1.add(scrollPane);
+        jdialog1.setVisible(true);
+    }
+    public void reset(){
+        int c = pro.reset();
+        if(c == 0){
+            JOptionPane.showMessageDialog(this, "Reset success!!!");
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Reset fail!!!");
+        }
     }
     
     public static void main(String args[]) {
@@ -182,3 +350,4 @@ public class MenuMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
+

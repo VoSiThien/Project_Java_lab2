@@ -24,22 +24,26 @@ public class processVMain {
         p.loadData(mapkey, mapvalue, listHistory, f);
     }
 
-    public TreeMap<String, String> SearchSlang(String key) {
-        TreeMap<String, String> result = new TreeMap<String, String>();
+    public Object [][] SearchSlang(String key) {
+        Object [][] result = new Object[1][2];
         if (mapkey.containsKey(key)) {
-            result.put(key, mapkey.get(key));
+            result[0][0] = key.toString();
+            result[0][1] = mapkey.get(key).toString();
         }
+        System.out.println(result[0][0] + " " + result[0][1]);
         return result;
     }
 
-    public TreeMap<String, String> SearchDefinition(String value) {
-        TreeMap<String, String> result = new TreeMap<String, String>();
+    public Object [][] SearchDefinition(String value) {
+        Object [][] result = new Object[0][0];
         if (mapvalue.containsKey(value)) {
             String val = mapvalue.get(value);
             String[] list = val.split("\\s");
 
-            for (String s : list) {
-                result.put(s.replace("|", ""), value);
+            result = new Object[list.length][2];
+            for(int i = 0; i < list.length; i++){
+                result[i][0] = list[i].replace("|", "").toString();
+                result[i][1] = value.toString();
             }
         }
         return result;
