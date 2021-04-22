@@ -76,7 +76,6 @@ $_$`Has money
 10CHAR`Padding where at least 10 characters are required
 10Q`Thank you
 10X`Thanks
-123`thien2
 1AAT`One At A Time
 1D`One Direction (band)
 1UP`Extra life in a game

@@ -44,6 +44,7 @@ public class MenuMain extends javax.swing.JFrame {
     private JLabel jlabel2;
     private JLabel jlabel3;
     private JLabel jlabelRandom;
+    private JLabel jlabelRandom2;
     private JLabel jlabelqs1;
 
     private JTextField jtext1;
@@ -383,16 +384,18 @@ public class MenuMain extends javax.swing.JFrame {
     }
 
     public void randomSlang() {
-        
         jdialog2 = new JDialog(this, "Ramdom slang word");
         jdialog2.setSize(400, 200);
         jdialog2.setLocationRelativeTo(null);
         jdialog2.setModal(true);
         jdialog2.setLayout(null);
         SlangWord slang = pro.ramdomSlang();
-        jlabelRandom = new JLabel("Slang word: " + slang.getSlang() + " Definition: " + slang.getDefinition());
-        jlabelRandom.setBounds(10, 50, 300, 20);
+        jlabelRandom = new JLabel("Slang word: " + slang.getSlang());
+        jlabelRandom.setBounds(10, 40, 300, 20);
+        jlabelRandom2 = new JLabel("Definition: " + slang.getDefinition());
+        jlabelRandom2.setBounds(10, 60, 600, 20);
         jdialog2.add(this.jlabelRandom);
+        jdialog2.add(this.jlabelRandom2);
         jdialog2.setBackground(Color.white);
         jdialog2.setVisible(true);
     }

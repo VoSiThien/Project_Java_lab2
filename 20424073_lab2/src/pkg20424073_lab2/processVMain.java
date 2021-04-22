@@ -138,6 +138,7 @@ public class processVMain {
         marge = mapvalue.get(value);// return definition
         marge = marge.replace("| " + key, "");
         marge = marge.replace(key, "");
+        
 
         if (marge.equals("")) {
             mapvalue.remove(value);
@@ -154,10 +155,15 @@ public class processVMain {
     }
     
     public void Duplicate(String key, String value){
-        String f = "DuplicateSlang.txt";
-        TreeMap<String, String> dup = new TreeMap<String, String>();
-        dup.put(key, value);
-        p.WriteDatatoFile(dup, listHistory, f);
+        String values = mapkey.get(key).toString();
+        String valueshead = mapkey.get(key).toString();
+        values = values.replace(value + "| ", "");
+        values = values.replace("| " + value, "");
+        values = values + "| " + value;
+        mapkey.put(key, values);
+        
+        mapvalue.remove(valueshead);
+        mapvalue.put(values, key);
     }
     
     public int addSlang(String Key, String value) {
@@ -190,10 +196,11 @@ public class processVMain {
                 mapvalue.replace(value, marge);
             } else {
                 marge = mapvalue.get(value);// return definition
+                marge = marge.replace(key + "| ", "");
                 marge = marge.replace("| " + key, "");
                 marge = marge.replace(key, "");
 
-                if (marge.equals("")) {
+                if (marge.equals("") || marge.equals(" ")) {
                     mapvalue.remove(value);
                 } else {
                     mapvalue.replace(value, marge);
