@@ -24,6 +24,17 @@ public class processVMain {
         p.loadData(mapkey, mapvalue, listHistory, f);
         
     }
+    public Object[][] getMapkey(){
+        Object[][] result = new Object[mapkey.size()][2];
+        int i = 0;
+        for (Map.Entry m : mapkey.entrySet()) {
+            result[i][0] = m.getKey();
+            result[i][1] = m.getValue();
+            i++;
+        }
+
+        return result;
+    }
 
     public Object[][] SearchSlang(String key) {
         Object[][] result = new Object[1][2];
@@ -120,6 +131,35 @@ public class processVMain {
         p.WriteDatatoFile(mapkey, listHistory, f);
     }
     
+    public void OverWrite(String key, String newvalue) {
+        String value = mapkey.get(key);
+        mapkey.put(key, newvalue);
+        String marge = "";
+        marge = mapvalue.get(value);// return definition
+        marge = marge.replace("| " + key, "");
+        marge = marge.replace(key, "");
+
+        if (marge.equals("")) {
+            mapvalue.remove(value);
+        } else {
+            mapvalue.replace(value, marge);
+        }
+        if (mapvalue.containsKey(newvalue)) {
+            marge = mapvalue.get(newvalue) + "| " + key;
+            mapvalue.replace(newvalue, marge);
+        } else {
+            marge = key;
+            mapvalue.put(newvalue, marge);
+        }
+    }
+    
+    public void Duplicate(String key, String value){
+        String f = "DuplicateSlang.txt";
+        TreeMap<String, String> dup = new TreeMap<String, String>();
+        dup.put(key, value);
+        p.WriteDatatoFile(dup, listHistory, f);
+    }
+    
     public int addSlang(String Key, String value) {
         if (mapkey.containsKey(Key)) {
             return 1;
@@ -136,34 +176,38 @@ public class processVMain {
     
     public int edit(String key, String newkey, String newvalue) {
         String value = mapkey.get(key);
-
-        mapkey.remove(key);
-        mapkey.put(newkey, newvalue);
-
-        String marge = "";
-        if (value.equals(newvalue)) {
-            marge = mapvalue.get(value);// return definition
-            marge = marge.replace(key, newkey);
-            mapvalue.replace(value, marge);
-        } else {
-            marge = mapvalue.get(value);// return definition
-            marge = marge.replace("| " + key, "");
-            marge = marge.replace(key, "");
-
-            if (marge.equals("")) {
-                mapvalue.remove(value);
-            } else {
-                mapvalue.replace(value, marge);
-            }
-            if (mapvalue.containsKey(newvalue)) {
-                marge = mapvalue.get(newvalue) + "| " + newkey;
-                mapvalue.replace(newvalue, marge);
-            } else {
-                marge = newkey;
-                mapvalue.put(newvalue, marge);
-            }
+        if (!key.equals(newkey) && mapkey.containsKey(newkey)) {
+            return 1;
         }
-        return 0;
+        else {
+            mapkey.remove(key);
+            mapkey.put(newkey, newvalue);
+
+            String marge = "";
+            if (value.equals(newvalue)) {
+                marge = mapvalue.get(value);// return definition
+                marge = marge.replace(key, newkey);
+                mapvalue.replace(value, marge);
+            } else {
+                marge = mapvalue.get(value);// return definition
+                marge = marge.replace("| " + key, "");
+                marge = marge.replace(key, "");
+
+                if (marge.equals("")) {
+                    mapvalue.remove(value);
+                } else {
+                    mapvalue.replace(value, marge);
+                }
+                if (mapvalue.containsKey(newvalue)) {
+                    marge = mapvalue.get(newvalue) + "| " + newkey;
+                    mapvalue.replace(newvalue, marge);
+                } else {
+                    marge = newkey;
+                    mapvalue.put(newvalue, marge);
+                }
+            }
+            return 0;
+        }
     }
     
     public int deleted(String key) {

@@ -71,7 +71,12 @@ public class processIO {
             BufferedWriter buffer = new BufferedWriter(writer);
             buffer.write("Slag`Meaning\n");
             for (Map.Entry m : mapkey.entrySet()) {
-                buffer.write(m.getKey() + "`" + m.getValue() + "\n");
+                if(!m.getKey().toString().equals("")){
+                    buffer.write(m.getKey() + "`" + m.getValue() + "\n");
+                }
+                else{
+                    buffer.write(m.getValue() + "\n");
+                }
             }
             buffer.close();
             writer = new FileWriter(history);

@@ -32,6 +32,7 @@ public class MenuMain extends javax.swing.JFrame {
     private JButton jbt9;
     private JButton jbt10;
     private JButton jbtqs11;
+    private JButton jbtLoad;
 
     private JPanel jpanel1;
     private JPanel jpanel2;
@@ -51,6 +52,7 @@ public class MenuMain extends javax.swing.JFrame {
 
     private JTable jtable1;
     private JScrollPane jsc1;
+    private DefaultTableModel model;
 
     private JDialog jdialog1;
     private JDialog jdialog2;
@@ -97,7 +99,8 @@ public class MenuMain extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public void Myinit() {
-
+        this.jtext2 = new JTextField();
+        this.jtext3 = new JTextField();
         this.setSize(750, 600);
         this.setTitle("Menu");
         this.setLayout(new BorderLayout());
@@ -166,6 +169,22 @@ public class MenuMain extends javax.swing.JFrame {
             }
         });
         this.jpanel1.add(this.jbt2);
+        
+        this.jbtLoad = new JButton();
+        this.jbtLoad.setText("Load");
+        this.jbtLoad.setBounds(10, 70, 80, 30);
+        this.jbtLoad.setActionCommand("jbtLoad");
+        this.jbtLoad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                long startTime = System.currentTimeMillis();
+//                long endTime = System.currentTimeMillis();
+//                System.out.println("Total execution time: " + (endTime - startTime));
+                String[] columnNames = {"Slang Word", "Definition"};
+                Object[][] data = pro.getMapkey();
+                addTable(jtable1, columnNames, data);
+            }
+        });
+        this.jpanel1.add(this.jbtLoad);
 
         this.jbt3 = new JButton();
         this.jbt3.setText("Hitory");
@@ -204,7 +223,7 @@ public class MenuMain extends javax.swing.JFrame {
         this.jsc1 = new JScrollPane(this.jtable1);
         this.jpanel2.add(this.jsc1);
         String[] columnNames = {"Slang Word", "Definition"};
-        Object[][] data = null;
+        Object[][] data = pro.getMapkey();
         this.addTable(jtable1, columnNames, data);
 
         jtable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -229,6 +248,11 @@ public class MenuMain extends javax.swing.JFrame {
         this.jbt6.setText("Edit");
         this.jbt6.setBounds(165, 100, 140, 30);
         this.jbt6.setActionCommand("jbt6");
+        this.jbt6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editSlang();
+            }
+        });
         this.jpanel3.add(this.jbt6);
 
         this.jbt7 = new JButton();
@@ -242,11 +266,10 @@ public class MenuMain extends javax.swing.JFrame {
         });
         this.jpanel3.add(this.jbt7);
 
-        this.jtext2 = new JTextField();
         this.jtext2.setBounds(100, 10, 280, 30);
         this.jpanel3.add(this.jtext2);
 
-        this.jtext3 = new JTextField();
+        
         this.jtext3.setBounds(100, 50, 280, 30);
         this.jpanel3.add(this.jtext3);
 
@@ -293,21 +316,22 @@ public class MenuMain extends javax.swing.JFrame {
     }
 
     public void addTable(JTable tb, String[] col, Object[][] data) {
-        DefaultTableModel model = new DefaultTableModel(data, col);
+        model = new DefaultTableModel(data, col);
         this.jtable1.removeAll();
         tb.setModel(model);
-        
+        deleteText();
     }
 
     public void searchSlang() {
+        
         String[] col = {"Slang Word", "Definition"};
         String key = this.jtext1.getText().toString();
         Object[][] data = pro.SearchSlang(key);
         this.addTable(jtable1, col, data);
-        
     }
 
     public void searchDefinition() {
+        
         String[] col = {"Slang Word", "Definition"};
         String value = this.jtext1.getText().toString();
         Object[][] data = pro.SearchDefinition(value);
@@ -315,12 +339,12 @@ public class MenuMain extends javax.swing.JFrame {
     }
 
     public void ListHistory() {
-        JPanel panelHIS = new JPanel(new BorderLayout());
+        JPanel panelHIS = new JPanel(new GridLayout(1,1));
         jdialog1 = new JDialog(this, "History");
         jdialog1.setSize(500, 500);
         jdialog1.setLocationRelativeTo(null);
         jdialog1.setModal(true);
-        jdialog1.setLayout(new FlowLayout());
+        jdialog1.setLayout(new GridLayout(1,1));
 
         ArrayList<String> lh = pro.ListHistory();
         DefaultListModel<String> l1 = new DefaultListModel<>();
@@ -341,18 +365,25 @@ public class MenuMain extends javax.swing.JFrame {
         panelHIS.add(scrollPane);
         jdialog1.add(panelHIS);
         jdialog1.setVisible(true);
+        
     }
 
     public void reset() {
         int c = pro.reset();
         if (c == 0) {
             JOptionPane.showMessageDialog(this, "Reset success!!!");
+            deleteText();
+            String[] columnNames = {"Slang Word", "Definition"};
+            Object[][] data = null;
+            addTable(jtable1, columnNames, data);
         } else {
-            JOptionPane.showMessageDialog(this, "Reset fail!!!", "Warning",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Reset fail!!!", "Warning", JOptionPane.WARNING_MESSAGE);
         }
+
     }
 
     public void randomSlang() {
+        
         jdialog2 = new JDialog(this, "Ramdom slang word");
         jdialog2.setSize(400, 200);
         jdialog2.setLocationRelativeTo(null);
@@ -460,6 +491,7 @@ public class MenuMain extends javax.swing.JFrame {
         jdialog3.add(this.jradio3);
         jdialog3.add(this.jradio4);
         jdialog3.add(this.jbtqs11);
+        
         jdialog3.setVisible(true);        
     }
     
@@ -505,32 +537,71 @@ public class MenuMain extends javax.swing.JFrame {
         int check = pro.addSlang(key, value);
         if(check == 0){
             JOptionPane.showMessageDialog(this, "Add compalte!!!");
+            deleteText();
         } else {
-            JOptionPane.showMessageDialog(this, "Add fail!!!", "WARNING",JOptionPane.WARNING_MESSAGE);
+            int optionType = JOptionPane.YES_NO_CANCEL_OPTION;
+            int result = JOptionPane.showConfirmDialog(this, "Select yes : Overwrite\nselect no : Duplicate", "Warning", optionType);
+            if (result == JOptionPane.YES_OPTION) {
+                pro.OverWrite(key, value);
+            }
+            if (result == JOptionPane.NO_OPTION) {
+                pro.Duplicate(key, value);
+            }
         }
     }
     
     public void deleted() {
-        String key = "123";
-        int check = 1;
-        int optionType = JOptionPane.OK_CANCEL_OPTION;
-        int result = JOptionPane.showConfirmDialog(jdialog3, "Confirm deletion", "Warning", optionType);
-        if (result == JOptionPane.OK_OPTION) {
-            check = pro.deleted(key);
+        if (this.jtable1.getSelectedRows().length != 0) {
+            int[] row = this.jtable1.getSelectedRows();
+            String key = this.jtable1.getValueAt(row[0], 0).toString();
+            int check = 1;
+            int optionType = JOptionPane.OK_CANCEL_OPTION;
+            int result = JOptionPane.showConfirmDialog(this, "Confirm deletion", "Warning", optionType);
+            if (result == JOptionPane.OK_OPTION) {
+                check = pro.deleted(key);
+            }
+            if (check == 0) {
+                JOptionPane.showMessageDialog(this, "Delete complate");
+                this.model.removeRow(row[0]);
+                deleteText();
+            } else {
+                JOptionPane.showMessageDialog(this, "Delete fail!!!", "WARNING", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select slang from table!", "WARNING", JOptionPane.WARNING_MESSAGE);
         }
-        if(check == 0){
-            JOptionPane.showMessageDialog(this, "Delete complate");
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Delete fail!!!", "WARNING",JOptionPane.WARNING_MESSAGE);
-        }
-
     }
     
-    public void click_row_table(){
-//        int[] row = this.jtable1.getSelectedRows();
-//        this.jtext2.setText(this.jtable1.getValueAt(row[0], 0).toString());
-//        this.jtext3.setText(this.jtable1.getValueAt(row[0], 1).toString());
+    public void editSlang() {
+        if (this.jtable1.getSelectedRows().length != 0) {
+            int[] row = this.jtable1.getSelectedRows();
+            String key = this.jtable1.getValueAt(row[0], 0).toString();
+            String newkey = this.jtext2.getText();
+            String newvalue = this.jtext3.getText();
+            int check = pro.edit(key, newkey, newvalue);
+            if (check == 0) {
+                JOptionPane.showMessageDialog(this, "Edit complate");
+            } else {
+                JOptionPane.showMessageDialog(this, "Edit fail, Slang word already exist", "WARNING", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select slang from table!", "WARNING", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    public void click_row_table() {
+        if (this.jtable1.getSelectedRows().length != 0) {
+            int[] row = this.jtable1.getSelectedRows();
+            this.jtext2.setText(this.jtable1.getValueAt(row[0], 0).toString());
+            this.jtext3.setText(this.jtable1.getValueAt(row[0], 1).toString());
+        }
+        else{
+            deleteText();
+        }
+    }
+    
+    public void deleteText(){
+        this.jtext2.setText("");
+        this.jtext3.setText("");
     }
     
     public static void main(String args[]) {
