@@ -20,7 +20,7 @@ public class processVMain {
     private ArrayList<String> listHistory = new ArrayList<String>();
 
     public processVMain() {
-        String f = "slangnew.txt";
+        String f = "../data/slangnew.txt";
         p.loadData(mapkey, mapvalue, listHistory, f);
         
     }
@@ -67,7 +67,7 @@ public class processVMain {
     }
 
     public int reset() {
-        String fs = "slang.txt";
+        String fs = "../data/slang.txt";
         mapkey = new TreeMap<String, String>();
         mapvalue = new TreeMap<String, String>();
         p.loadData(mapkey, mapvalue, listHistory, fs);
@@ -127,7 +127,7 @@ public class processVMain {
     }
     
     public void saveData(){
-        String f = "slangnew.txt";
+        String f = "../data/slangnew.txt";
         p.WriteDatatoFile(mapkey, listHistory, f);
     }
     

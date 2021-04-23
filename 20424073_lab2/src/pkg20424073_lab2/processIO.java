@@ -13,7 +13,7 @@ import java.util.concurrent.*;
 
 public class processIO {
     public void loadData(TreeMap<String, String> mapkey, TreeMap<String, String> mapvalue, ArrayList<String> His, String f) {
-        String history = "history.txt";
+        String history = "../data/history.txt";
         try {
             File file = new File(history);
             if (file.exists()) {
@@ -64,7 +64,7 @@ public class processIO {
     }
 
     public void WriteDatatoFile(TreeMap<String, String> mapkey, ArrayList<String> His, String f) {
-        String history = "history.txt";
+        String history = "../data/history.txt";
         FileWriter writer;
         try {
             writer = new FileWriter(f);
